@@ -281,8 +281,6 @@ export function Chatbot() {
               </a>
               <a
                 href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
                 className="btn-press flex items-center justify-center gap-2 rounded-sm border border-line bg-canvas px-4 py-3 text-[0.88rem] font-semibold text-ink hover:border-forest hover:text-forest"
               >
                 <MessageSquare className="size-4" strokeWidth={1.9} />

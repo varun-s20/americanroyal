@@ -6,6 +6,5 @@ export function openChat() {
   window.dispatchEvent(new Event(OPEN_CHAT_EVENT));
 }
 
-/** WhatsApp hand-off used across the connect surfaces. */
-export const WHATSAPP_URL =
-  "https://wa.me/917778834743?text=Hi%20American%20Royal%20Mortgage%2C%20I%27d%20like%20to%20speak%20with%20a%20specialist.";
+/** WhatsApp hand-off used across the connect surfaces. Dead link for now. */
+export const WHATSAPP_URL = "#";

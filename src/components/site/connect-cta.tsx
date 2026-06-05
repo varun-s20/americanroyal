@@ -39,8 +39,6 @@ export function ConnectCta({
             </button>
             <a
               href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
               className="btn-press inline-flex items-center justify-center gap-2 rounded-sm border border-line bg-paper px-6 py-3.5 text-[0.9rem] font-semibold text-ink hover:border-forest hover:text-forest"
             >
               <MessageSquare className="size-[1.05rem]" strokeWidth={1.85} />

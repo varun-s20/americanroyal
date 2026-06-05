@@ -71,8 +71,6 @@ export function Connect() {
         <Reveal delay={80}>
           <a
             href={WHATSAPP_URL}
-            target="_blank"
-            rel="noreferrer"
             className="quote-cta btn-press group mt-10 flex w-full items-center gap-5 overflow-hidden rounded-2xl px-6 py-6 text-left sm:px-8 sm:py-7"
           >
             <span className="relative z-10 flex items-center gap-4 sm:gap-5">
@@ -81,7 +79,7 @@ export function Connect() {
               </span>
               <span className="min-w-0">
                 <span className="display block text-[1.5rem] leading-none text-cream sm:text-[1.9rem]">
-                  Get approved now
+                  Get pre-approved now
                 </span>
                 <span className="mt-1.5 block text-[0.9rem] font-medium text-cream/75">
                   Free, with no impact on your credit. About two minutes.
@@ -133,7 +131,7 @@ function ActionRow({ label, note, icon: Icon, tile, onClick, href }: Action) {
 
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noreferrer" className={cls}>
+      <a href={href} className={cls}>
         {inner}
       </a>
     );
