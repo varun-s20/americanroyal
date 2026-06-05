@@ -272,6 +272,56 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
 
+  /* — Primary quote CTA: a deep cerulean (the brand trust color) fill with a
+       soft sky glow and a sheen that sweeps on hover. Built to outrank every
+       quiet action row beside it and pull the eye first, while sitting native
+       in the palette. Cream text on cerulean holds AA. — */
+  .quote-cta {
+    position: relative;
+    background-image: linear-gradient(
+      125deg,
+      var(--color-forest) 0%,
+      var(--color-forest-deep) 55%,
+      var(--color-forest-press) 100%
+    );
+    box-shadow: 0 16px 44px -16px oklch(0.54 0.132 237 / 0.6),
+      0 2px 4px rgba(20, 28, 46, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  }
+  .quote-cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    left: -65%;
+    width: 42%;
+    background: linear-gradient(
+      100deg,
+      transparent,
+      rgba(255, 255, 255, 0.22),
+      transparent
+    );
+    transform: skewX(-18deg);
+    pointer-events: none;
+  }
+  @media (hover: hover) {
+    .quote-cta {
+      transition: transform 220ms var(--ease-out-strong),
+        box-shadow 220ms var(--ease-out-strong);
+    }
+    .quote-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 58px -18px oklch(0.54 0.132 237 / 0.72),
+        0 3px 6px rgba(20, 28, 46, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    .quote-cta:hover::after {
+      animation: cta-sheen 900ms var(--ease-out-strong);
+    }
+  }
+  .quote-cta:active {
+    transform: translateY(0) scale(0.99);
+  }
+
   /* Lift + intensify the glow on the parent row's hover */
   .group:hover .tile-lift {
     transform: translateY(-3px) scale(1.06);
@@ -358,6 +408,16 @@
 
 details[open] .faq-answer {
   animation: answer-in 360ms var(--ease-out-quart);
+}
+
+/* Sheen sweep across the primary quote CTA on hover. */
+@keyframes cta-sheen {
+  from {
+    transform: translateX(0) skewX(-18deg);
+  }
+  to {
+    transform: translateX(620%) skewX(-18deg);
+  }
 }
 
 @keyframes kenburns {

@@ -1,14 +1,22 @@
 "use client";
 
-import { ArrowUpRight, MessageCircle, Phone, CalendarDays } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Calculator,
+  MessageCircle,
+  Phone,
+  CalendarDays,
+} from "lucide-react";
 import { Reveal } from "./reveal";
 import { openChat, WHATSAPP_URL } from "@/lib/chat";
 
 /**
- * "Talk to a real person" — a single-column band of action rows: start a chat,
- * reach a specialist on WhatsApp, or book a callback. Each row leads with a
+ * "Talk to a real person" — led by one bold, sun-gold quote CTA (the primary
+ * path we steer everyone toward), followed by quieter action rows: chat with a
+ * specialist, reach us on WhatsApp, or book a callback. The rows lead with a
  * vivid, glowing icon tile (emerald / teal / coral) so the choices feel alive
- * and genuinely pop off the warm paper.
+ * and genuinely pop off the warm paper, while the gold CTA above outranks them.
  */
 
 type Action = {
@@ -23,21 +31,21 @@ type Action = {
 const ACTIONS: Action[] = [
   {
     label: "Connect me to a specialist",
-    note: "A quick chat, then a real person takes it from there",
+    note: "A short chat, then a real person takes it from there",
     icon: MessageCircle,
     tile: "tile-red",
     onClick: openChat,
   },
   {
     label: "Chat with an agent on WhatsApp",
-    note: "Message us directly, replies within the hour",
+    note: "Message us directly, with replies within the hour",
     icon: Phone,
     tile: "tile-teal",
     href: WHATSAPP_URL,
   },
   {
     label: "Request a callback",
-    note: "Tell us when works, we call you back",
+    note: "Tell us when suits you, and we'll call you back",
     icon: CalendarDays,
     tile: "tile-coral",
     onClick: openChat,
@@ -51,15 +59,46 @@ export function Connect() {
         <Reveal>
           <p className="eyebrow text-brass">Talk to a real person</p>
           <h2 className="display mt-4 max-w-2xl text-[clamp(2rem,6vw,3.1rem)] text-ink">
-            However you&rsquo;d like to start, we&rsquo;re here for it.
+            Let&rsquo;s get you home. Start however feels right.
           </h2>
           <p className="mt-4 max-w-xl text-pretty text-[1.02rem] leading-relaxed text-muted">
-            Ask a question, leave your details, or jump straight to a specialist.
-            No call centers, no scripts, no pressure.
+            See your numbers in minutes, or ask us anything first. No call
+            centers, no scripts, no pressure, only people who treat your home
+            like it&rsquo;s their own.
           </p>
         </Reveal>
 
-        <div className="mt-12 border-t border-line">
+        {/* — Primary path: the bold sun-gold quote CTA — */}
+        <Reveal delay={80}>
+          <button
+            type="button"
+            onClick={openChat}
+            className="quote-cta btn-press group mt-10 flex w-full items-center justify-between gap-5 overflow-hidden rounded-2xl px-6 py-6 text-left sm:px-8 sm:py-7"
+          >
+            <span className="relative z-10 flex items-center gap-4 sm:gap-5">
+              <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-cream/15 text-cream sm:size-14">
+                <Calculator className="size-6 sm:size-7" strokeWidth={2} />
+              </span>
+              <span className="min-w-0">
+                <span className="display block text-[1.5rem] leading-none text-cream sm:text-[1.9rem]">
+                  Get a quote now
+                </span>
+                <span className="mt-1.5 block text-[0.9rem] font-medium text-cream/75">
+                  Free, with no impact on your credit. About two minutes.
+                </span>
+              </span>
+            </span>
+            <span className="tile-gold relative z-10 grid size-11 shrink-0 place-items-center rounded-full text-night transition-transform duration-300 ease-out group-hover:translate-x-1 sm:size-12">
+              <ArrowRight className="size-5" strokeWidth={2.25} />
+            </span>
+          </button>
+        </Reveal>
+
+        {/* — Quieter ways in, for people who want to talk first — */}
+        <Reveal delay={140}>
+          <p className="eyebrow mt-12 text-faint">Or reach a person directly</p>
+        </Reveal>
+        <div className="mt-4 border-t border-line">
           {ACTIONS.map((a, i) => (
             <Reveal key={a.label} delay={i * 80}>
               <ActionRow {...a} />
