@@ -69,9 +69,10 @@ export function Connect() {
 
         {/* — Primary path: the bold sun-gold quote CTA — */}
         <Reveal delay={80}>
-          <button
-            type="button"
-            onClick={openChat}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
             className="quote-cta btn-press group mt-10 flex w-full items-center gap-5 overflow-hidden rounded-2xl px-6 py-6 text-left sm:px-8 sm:py-7"
           >
             <span className="relative z-10 flex items-center gap-4 sm:gap-5">
@@ -87,7 +88,7 @@ export function Connect() {
                 </span>
               </span>
             </span>
-          </button>
+          </a>
         </Reveal>
 
         {/* — Quieter ways in, for people who want to talk first — */}
