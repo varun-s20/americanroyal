@@ -3,39 +3,67 @@
 
 /* ============================================================
    AMERICAN ROYAL MORTGAGE CORP — Design System
-   Warm ivory paper × deep evergreen × a single brass accent.
-   Heritage Caslon display over a humanist grotesque. Lending
-   that feels considered, established, and human.
+   Open daylight × bright cerulean sky-blue × warm sun-gold, with a
+   fresh cyan current and a glowing sunset spark. Heritage Caslon
+   display over a humanist grotesque. Lending that feels secured,
+   established and wholly dependable — yet bright, open, alive and
+   genuinely warm.
+
+   Trust is carried by a vivid SKY-BLUE (cerulean, hue ≈ 235) — the
+   honest, wide-open blue of a clear day rather than a heavy royal
+   navy. Warm sun-gold and a sunset coral keep the page warm and
+   alive. Color is authored in OKLCH: chroma is pushed for brightness,
+   lightness is held where text must stay AA-legible.
    ============================================================ */
 
 @theme {
-  /* — Evergreen: the trust color, carries the brand — */
-  --color-forest: #234c39;
-  --color-forest-deep: #1b3c2c;
-  --color-forest-press: #143025;
-  --color-forest-tint: #e7efe9;
+  /* — Cerulean sky: the trust color, carries the brand —
+     Bright, clear sky-blue (≈ #0570AD), vivid yet deep enough to hold
+     warm-ivory text at AA (≈5.2:1). This is open, honest dependability. */
+  --color-forest: oklch(0.54 0.132 237);
+  --color-forest-deep: oklch(0.468 0.125 239);
+  --color-forest-press: oklch(0.398 0.108 241);
+  --color-forest-tint: oklch(0.9 0.055 232);
 
-  /* — Brass: warmth, used sparingly (< 10%) — */
-  --color-brass: #a6783f;
-  --color-brass-deep: #8f6532;
-  --color-brass-soft: #f1e8d7;
+  /* — Sky glow: the bright, decorative side of the brand —
+     luminous sky-blue (≈ #0EA5E9) for icon tiles, accents and ambient
+     glows (not body text). This is the "alive & bright" pop. */
+  --color-emerald: oklch(0.685 0.142 233);
+  --color-emerald-soft: oklch(0.95 0.035 230);
 
-  /* — Paper & ivory neutrals (tinted warm) — */
-  --color-canvas: #f5f3ec;
-  --color-paper: #fbfaf5;
-  --color-paper-2: #ece8dd;
-  --color-cream: #f3efe4;
+  /* — Sun-gold: a readable, warm heritage gold for labels & accents —
+     held at L≈0.55 so small eyebrow labels keep ≈4.5:1 on light paper. */
+  --color-brass: oklch(0.55 0.118 70);
+  --color-brass-deep: oklch(0.475 0.102 66);
+  --color-brass-soft: oklch(0.905 0.072 82);
 
-  --color-line: #e3dfd3;
-  --color-line-soft: #eeebe1;
+  /* — Luminous sun: the bright fill/glow gold (ink-on-gold, ≈ #F59E0B) — */
+  --color-gold: oklch(0.82 0.155 84);
+  --color-gold-soft: oklch(0.95 0.05 86);
 
-  --color-ink: #1a201c;
-  --color-ink-soft: #3d443e;
-  --color-muted: #6c736a;
-  --color-faint: #99a094;
+  /* — Sunset coral: a warm, welcoming spark against the sky-blue — */
+  --color-coral: oklch(0.7 0.175 50);
+  --color-coral-soft: oklch(0.93 0.062 58);
 
-  /* — Hero dark base: warm evergreen-black — */
-  --color-night: #0e1a13;
+  /* — Fresh cyan: a clear, electric cool current beside the sky-blue — */
+  --color-teal: oklch(0.72 0.115 212);
+
+  /* — Paper & sky neutrals: bright, clean, faintly sky-tinted — */
+  --color-canvas: oklch(0.988 0.006 232);
+  --color-paper: oklch(0.997 0.003 232);
+  --color-paper-2: oklch(0.966 0.01 232);
+  --color-cream: oklch(0.967 0.016 86);
+
+  --color-line: oklch(0.916 0.012 232);
+  --color-line-soft: oklch(0.96 0.008 232);
+
+  --color-ink: oklch(0.275 0.05 245);
+  --color-ink-soft: oklch(0.41 0.045 243);
+  --color-muted: oklch(0.525 0.038 240);
+  --color-faint: oklch(0.685 0.03 236);
+
+  /* — Hero dark base: a deep cerulean navy (rich & bright, not black) — */
+  --color-night: oklch(0.302 0.082 246);
 
   /* — Legacy aliases (so older components still resolve) — */
   --color-foam: var(--color-paper);
@@ -45,7 +73,7 @@
   --color-mint-deep: var(--color-forest-deep);
   --color-mint-press: var(--color-forest-press);
   --color-mint-tint: var(--color-forest-tint);
-  --color-sky-tint: #eef2ee;
+  --color-sky-tint: var(--color-emerald-soft);
   --color-indigo: var(--color-brass);
 
   /* — shadcn semantic tokens (mapped to brand) — */
@@ -62,9 +90,9 @@
   --color-muted-foreground: var(--color-muted);
   --color-accent: var(--color-brass);
   --color-accent-foreground: var(--color-cream);
-  --color-destructive: #b4452f;
+  --color-destructive: oklch(0.55 0.19 28);
   --color-border: var(--color-line);
-  --color-input: rgba(26, 32, 28, 0.14);
+  --color-input: rgba(20, 28, 46, 0.14);
   --color-ring: var(--color-forest);
 
   /* — Typography — */
@@ -87,12 +115,12 @@
   --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
 
   /* — Shadows: ultra-diffuse, low opacity — */
-  --shadow-soft: 0 1px 2px rgba(26, 32, 28, 0.03),
-    0 14px 40px -30px rgba(26, 32, 28, 0.16);
-  --shadow-card: 0 1px 2px rgba(26, 32, 28, 0.03),
-    0 24px 60px -40px rgba(26, 32, 28, 0.22);
-  --shadow-panel: 0 2px 6px rgba(20, 48, 37, 0.06),
-    0 30px 70px -34px rgba(20, 48, 37, 0.34);
+  --shadow-soft: 0 1px 2px rgba(20, 28, 46, 0.03),
+    0 14px 40px -30px rgba(20, 28, 46, 0.16);
+  --shadow-card: 0 1px 2px rgba(20, 28, 46, 0.03),
+    0 24px 60px -40px rgba(20, 28, 46, 0.22);
+  --shadow-panel: 0 2px 6px rgba(18, 30, 64, 0.06),
+    0 30px 70px -34px rgba(18, 30, 64, 0.34);
 }
 
 @layer base {
@@ -156,7 +184,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.18;
+    opacity: 0.1;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
   }
@@ -200,6 +228,45 @@
   }
   .text-pretty {
     text-wrap: pretty;
+  }
+
+  /* — Vivid icon tiles: saturated gradients + a matching colored
+       glow so the glyph genuinely pops off the page — */
+  .tile-emerald {
+    background-image: linear-gradient(135deg, oklch(0.7 0.15 230) 0%, oklch(0.5 0.135 240) 100%);
+    box-shadow: 0 10px 26px -8px oklch(0.6 0.14 235 / 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .tile-teal {
+    background-image: linear-gradient(135deg, oklch(0.74 0.12 208) 0%, oklch(0.52 0.1 220) 100%);
+    box-shadow: 0 10px 26px -8px oklch(0.7 0.115 212 / 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .tile-coral {
+    background-image: linear-gradient(135deg, oklch(0.78 0.16 62) 0%, oklch(0.62 0.18 44) 100%);
+    box-shadow: 0 10px 26px -8px oklch(0.7 0.175 50 / 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.32);
+  }
+  .tile-gold {
+    background-image: linear-gradient(135deg, oklch(0.87 0.15 90) 0%, oklch(0.67 0.14 74) 100%);
+    box-shadow: 0 10px 26px -8px oklch(0.82 0.155 84 / 0.65),
+      inset 0 1px 0 rgba(255, 255, 255, 0.42);
+  }
+  .tile-red {
+    background-image: linear-gradient(135deg, oklch(0.66 0.21 26) 0%, oklch(0.5 0.2 28) 100%);
+    box-shadow: 0 10px 26px -8px oklch(0.58 0.21 27 / 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  /* Lift + intensify the glow on the parent row's hover */
+  .group:hover .tile-lift {
+    transform: translateY(-3px) scale(1.06);
+    filter: saturate(1.12) brightness(1.04);
+  }
+  .tile-lift {
+    transition: transform 220ms var(--ease-out-strong),
+      filter 220ms var(--ease-out-strong),
+      box-shadow 220ms var(--ease-out-strong);
   }
 }
 

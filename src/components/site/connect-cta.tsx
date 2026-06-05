@@ -32,7 +32,7 @@ export function ConnectCta({
             <button
               type="button"
               onClick={openChat}
-              className="btn-press inline-flex items-center justify-center gap-2 rounded-sm bg-forest px-6 py-3.5 text-[0.9rem] font-semibold text-cream hover:bg-forest-deep"
+              className="tile-emerald btn-press inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3.5 text-[0.9rem] font-semibold text-white hover:brightness-105"
             >
               <Headset className="size-[1.05rem]" strokeWidth={1.85} />
               Speak with a specialist

@@ -5,15 +5,17 @@ import { Reveal } from "./reveal";
 import { openChat, WHATSAPP_URL } from "@/lib/chat";
 
 /**
- * "Talk to a real person" — a single-column band of sharp-edged action rows:
- * start a chat, reach a specialist on WhatsApp, or book a callback. Flat, 1px
- * borders, one brass accent. No rounded pills, no heavy shadows, no imagery.
+ * "Talk to a real person" — a single-column band of action rows: start a chat,
+ * reach a specialist on WhatsApp, or book a callback. Each row leads with a
+ * vivid, glowing icon tile (emerald / teal / coral) so the choices feel alive
+ * and genuinely pop off the warm paper.
  */
 
 type Action = {
   label: string;
   note: string;
   icon: typeof MessageCircle;
+  tile: string;
   onClick?: () => void;
   href?: string;
 };
@@ -23,18 +25,21 @@ const ACTIONS: Action[] = [
     label: "Connect me to a specialist",
     note: "A quick chat, then a real person takes it from there",
     icon: MessageCircle,
+    tile: "tile-red",
     onClick: openChat,
   },
   {
     label: "Chat with an agent on WhatsApp",
     note: "Message us directly, replies within the hour",
     icon: Phone,
+    tile: "tile-teal",
     href: WHATSAPP_URL,
   },
   {
     label: "Request a callback",
     note: "Tell us when works, we call you back",
     icon: CalendarDays,
+    tile: "tile-coral",
     onClick: openChat,
   },
 ];
@@ -66,11 +71,13 @@ export function Connect() {
   );
 }
 
-function ActionRow({ label, note, icon: Icon, onClick, href }: Action) {
+function ActionRow({ label, note, icon: Icon, tile, onClick, href }: Action) {
   const inner = (
     <>
-      <span className="grid size-11 shrink-0 place-items-center border border-line bg-paper text-forest transition-colors group-hover:border-forest group-hover:bg-forest group-hover:text-cream">
-        <Icon className="size-[1.1rem]" strokeWidth={1.75} />
+      <span
+        className={`tile-lift grid size-12 shrink-0 place-items-center rounded-xl text-white ${tile}`}
+      >
+        <Icon className="size-[1.25rem]" strokeWidth={2.25} />
       </span>
       <span className="min-w-0 flex-1">
         <span className="block text-[1.02rem] font-semibold text-ink">{label}</span>
@@ -86,7 +93,7 @@ function ActionRow({ label, note, icon: Icon, onClick, href }: Action) {
   );
 
   const cls =
-    "btn-press group flex w-full items-center gap-4 border-b border-line bg-transparent px-1 py-5 text-left transition-colors hover:bg-paper";
+    "btn-press group flex w-full items-center gap-4 rounded-xl border-b border-line bg-transparent px-2 py-5 text-left transition-colors hover:bg-paper";
 
   if (href) {
     return (

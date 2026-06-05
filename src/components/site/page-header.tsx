@@ -14,10 +14,15 @@ export function PageHeader({
 }) {
   return (
     <header className="grain relative isolate overflow-hidden bg-night px-6 pb-16 pt-32 sm:pb-20 sm:pt-36">
-      {/* soft brass glow, top-right */}
+      {/* luminous gold glow, top-right */}
       <div
-        className="pointer-events-none absolute -right-24 -top-24 -z-10 size-80 rounded-full opacity-[0.16] blur-3xl"
-        style={{ background: "radial-gradient(circle, var(--color-brass) 0%, transparent 70%)" }}
+        className="pointer-events-none absolute -right-24 -top-24 -z-10 size-80 rounded-full opacity-[0.32] blur-3xl"
+        style={{ background: "radial-gradient(circle, var(--color-gold) 0%, transparent 70%)" }}
+      />
+      {/* bright emerald counter-glow, bottom-left — keeps the band alive */}
+      <div
+        className="pointer-events-none absolute -bottom-28 -left-20 -z-10 size-80 rounded-full opacity-[0.3] blur-3xl"
+        style={{ background: "radial-gradient(circle, var(--color-emerald) 0%, transparent 70%)" }}
       />
       <div className="mx-auto max-w-5xl">
         <p className="eyebrow text-brass-soft/80">{eyebrow}</p>

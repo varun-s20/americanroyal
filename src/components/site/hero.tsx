@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * American Royal hero — a full-bleed home clip under a warm evergreen grade,
- * with the brand tagline set large in heritage Caslon, anchored bottom-left.
- * No subheading: the line carries the whole promise.
+ * American Royal hero — a full-bleed home clip kept bright and true to color
+ * (only a light neutral scrim, no green grade), with the brand tagline set
+ * large in heritage Caslon, anchored bottom-left. No subheading: the line
+ * carries the whole promise.
  */
 export function Hero() {
   const [videoReady, setVideoReady] = useState(false);
@@ -28,12 +29,29 @@ export function Hero() {
           className="size-full object-cover transition-opacity duration-1000"
           style={{ opacity: videoReady ? 1 : 0 }}
         >
-          <source src="/media/8208898-hd_1080_1920_30fps.mp4" type="video/mp4" />
+          <source
+            src="https://xhhvokcsehxhjxabtvvw.supabase.co/storage/v1/object/public/dolobuck/7348153-uhd_3840_2160_25fps.mp4"
+            type="video/mp4"
+          />
         </video>
 
-        {/* warm evergreen grade — keeps the headline crisp over the footage */}
-        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/55 to-night/15" />
-        <div className="absolute inset-0 bg-gradient-to-r from-night/75 via-transparent to-transparent" />
+        {/* minimal neutral scrim — no green grade, so the footage keeps its
+            true, bright color. Darkens only the lower band, just enough for
+            the headline to hold contrast. */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(12,14,11,0.62) 0%, rgba(12,14,11,0.18) 26%, transparent 52%)",
+          }}
+        />
+        <div
+          className="absolute inset-y-0 left-0 w-2/3"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(12,14,11,0.34) 0%, transparent 100%)",
+          }}
+        />
       </div>
 
       {/* — Content — */}
