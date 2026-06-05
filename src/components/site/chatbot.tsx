@@ -8,6 +8,7 @@ import {
   type FormEvent,
 } from "react";
 import { MessageSquare, X, ArrowUp, Phone } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { OPEN_CHAT_EVENT, WHATSAPP_URL } from "@/lib/chat";
 
 /**
@@ -44,6 +45,7 @@ export function Chatbot() {
   const [step, setStep] = useState<Step>("name");
   const [draft, setDraft] = useState("");
   const [typing, setTyping] = useState(false);
+  const reduce = useReducedMotion();
 
   const idRef = useRef(0);
   const startedRef = useRef(false);
@@ -190,12 +192,32 @@ export function Chatbot() {
       </button>
 
       {/* Panel */}
-      {open && (
-        <div
+      <AnimatePresence>
+        {open && (
+        <motion.div
+          key="chat-panel"
           role="dialog"
           aria-label="Chat with an American Royal specialist"
           className="fixed bottom-20 right-5 z-50 flex h-[32rem] max-h-[calc(100svh-7rem)] w-[calc(100vw-2.5rem)] max-w-[23rem] flex-col overflow-hidden rounded-md border border-line bg-canvas shadow-panel sm:bottom-24 sm:right-6"
-          style={{ animation: "chat-in 0.4s var(--ease-out-quart)" }}
+          style={{ transformOrigin: "bottom right" }}
+          initial={
+            reduce
+              ? { opacity: 0 }
+              : { opacity: 0, y: 16, scale: 0.96, filter: "blur(8px)" }
+          }
+          animate={
+            reduce
+              ? { opacity: 1 }
+              : { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }
+          }
+          exit={
+            reduce
+              ? { opacity: 0 }
+              : { opacity: 0, y: 10, scale: 0.98, filter: "blur(6px)" }
+          }
+          transition={
+            reduce ? { duration: 0 } : { type: "spring", duration: 0.45, bounce: 0 }
+          }
         >
           {/* Header */}
           <header className="flex items-center gap-3 border-b border-forest-deep bg-forest px-4 py-3.5 text-cream">
@@ -295,8 +317,9 @@ export function Chatbot() {
               </p>
             </form>
           )}
-        </div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </>
   );
 }

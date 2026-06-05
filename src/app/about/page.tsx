@@ -5,6 +5,7 @@ import { Chatbot } from "@/components/site/chatbot";
 import { PageHeader } from "@/components/site/page-header";
 import { ConnectCta } from "@/components/site/connect-cta";
 import { Reveal } from "@/components/site/reveal";
+import { CountUp } from "@/components/site/count-up";
 
 export const metadata: Metadata = {
   title: "About us — American Royal Mortgage Corp",
@@ -95,18 +96,30 @@ export default function AboutPage() {
                 </p>
               </div>
               <dl className="mt-9 grid max-w-md grid-cols-3 gap-px border border-line bg-line">
-                {[
-                  { v: "2009", l: "Year founded" },
-                  { v: "12k+", l: "Families served" },
-                  { v: "4.9", l: "Average rating" },
-                ].map((s) => (
-                  <div key={s.l} className="bg-canvas px-4 py-5">
-                    <dt className="serif text-[1.6rem] font-bold leading-none text-forest">
-                      {s.v}
-                    </dt>
-                    <dd className="mt-2 text-[0.78rem] leading-snug text-muted">{s.l}</dd>
-                  </div>
-                ))}
+                <div className="bg-canvas px-4 py-5">
+                  <dt className="serif text-[1.6rem] font-bold leading-none text-forest">
+                    2009
+                  </dt>
+                  <dd className="mt-2 text-[0.78rem] leading-snug text-muted">
+                    Year founded
+                  </dd>
+                </div>
+                <div className="bg-canvas px-4 py-5">
+                  <dt className="serif text-[1.6rem] font-bold leading-none text-forest">
+                    <CountUp to={12} suffix="k+" duration={1700} />
+                  </dt>
+                  <dd className="mt-2 text-[0.78rem] leading-snug text-muted">
+                    Families served
+                  </dd>
+                </div>
+                <div className="bg-canvas px-4 py-5">
+                  <dt className="serif text-[1.6rem] font-bold leading-none text-forest">
+                    <CountUp to={4.9} decimals={1} duration={1400} />
+                  </dt>
+                  <dd className="mt-2 text-[0.78rem] leading-snug text-muted">
+                    Average rating
+                  </dd>
+                </div>
               </dl>
             </Reveal>
             <Reveal delay={120}>
@@ -184,7 +197,7 @@ export default function AboutPage() {
 
 function TeamCard({ name, role, bio, photo }: Member) {
   return (
-    <article className="group flex h-full flex-col border border-line bg-paper">
+    <article className="card-lift group flex h-full flex-col border border-line bg-paper">
       <div className="overflow-hidden border-b border-line">
         <img
           src={photo}

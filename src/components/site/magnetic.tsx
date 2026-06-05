@@ -26,6 +26,7 @@ export function Magnetic({
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(hover: none)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const rect = el.getBoundingClientRect();
     const mx = e.clientX - (rect.left + rect.width / 2);
     const my = e.clientY - (rect.top + rect.height / 2);

@@ -113,6 +113,14 @@
   --ease-out-quart: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+  /* deep, confident ease-out for large cinematic reveals */
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  /* a refined spring with the faintest settle — premium, never bouncy */
+  --ease-spring: linear(
+    0, 0.006, 0.025, 0.055, 0.097, 0.149, 0.211, 0.282 22.1%, 0.44, 0.6, 0.747,
+    0.867, 0.957 49.3%, 1.009, 1.035, 1.045 61.6%, 1.043, 1.03, 1.013 73.5%,
+    0.999, 0.991, 0.989, 0.991, 0.997, 1.002, 1.004, 1.002, 1
+  );
 
   /* — Shadows: ultra-diffuse, low opacity — */
   --shadow-soft: 0 1px 2px rgba(20, 28, 46, 0.03),
@@ -202,23 +210,29 @@
     transform: scale(0.985);
   }
 
-  /* Reveal-on-scroll base (paired with JS .is-visible) */
+  /* Reveal-on-scroll base (paired with JS .is-visible).
+     Opacity + translate + a faint blur, so content "materializes" into
+     focus rather than just sliding — the premium, physical feel. */
   .reveal {
     opacity: 0;
     transform: translateY(var(--reveal-y, 18px));
-    transition: opacity 0.7s var(--ease-out-quart),
-      transform 0.7s var(--ease-out-quart);
-    will-change: opacity, transform;
+    filter: blur(var(--reveal-blur, 5px));
+    transition: opacity 0.85s var(--ease-out-expo),
+      transform 0.85s var(--ease-out-expo),
+      filter 0.85s var(--ease-out-expo);
+    will-change: opacity, transform, filter;
   }
   .reveal.is-visible {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
   }
 
   @media (prefers-reduced-motion: reduce) {
     .reveal {
       opacity: 1;
       transform: none;
+      filter: none;
       transition: none;
     }
   }
@@ -268,9 +282,84 @@
       filter 220ms var(--ease-out-strong),
       box-shadow 220ms var(--ease-out-strong);
   }
+
+  /* — Card lift: a quiet rise + diffuse shadow on hover. Shadows over
+       borders (Jakub) so it reads on any surface. Transform/shadow only. — */
+  .card-lift {
+    transition: transform 360ms var(--ease-out-strong),
+      box-shadow 360ms var(--ease-out-strong),
+      border-color 360ms var(--ease-out-strong);
+    will-change: transform;
+  }
+  @media (hover: hover) {
+    .card-lift:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-card);
+    }
+  }
+
+  /* — Link underline: a fine rule that wipes in from the left on hover. — */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 320ms var(--ease-out-strong);
+  }
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* — Ambient glow drift for hero / page-header light blobs (decorative). — */
+  .drift {
+    animation: glow-drift 16s ease-in-out infinite;
+  }
+  .drift-slow {
+    animation: glow-drift 22s ease-in-out infinite;
+    animation-delay: -8s;
+  }
 }
 
 /* — Ambient keyframes — */
+@keyframes glow-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: var(--drift-opacity, 0.3);
+  }
+  50% {
+    transform: translate3d(4%, -3%, 0) scale(1.1);
+    opacity: calc(var(--drift-opacity, 0.3) * 1.25);
+  }
+}
+
+/* FAQ answer: soft fade + settle when a <details> opens. */
+@keyframes answer-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+details[open] .faq-answer {
+  animation: answer-in 360ms var(--ease-out-quart);
+}
+
 @keyframes kenburns {
   0% {
     transform: scale(1.06) translate(0, 0);
@@ -292,11 +381,13 @@
 @keyframes chat-in {
   0% {
     opacity: 0;
-    transform: translateY(14px) scale(0.98);
+    transform: translateY(14px) scale(0.97);
+    filter: blur(6px);
   }
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
@@ -329,6 +420,9 @@
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

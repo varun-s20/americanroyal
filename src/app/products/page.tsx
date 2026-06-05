@@ -5,6 +5,7 @@ import { Chatbot } from "@/components/site/chatbot";
 import { PageHeader } from "@/components/site/page-header";
 import { ConnectCta } from "@/components/site/connect-cta";
 import { Reveal } from "@/components/site/reveal";
+import { CountUp } from "@/components/site/count-up";
 
 export const metadata: Metadata = {
   title: "Home loan products — American Royal Mortgage Corp",
@@ -66,10 +67,10 @@ const PRODUCTS: Product[] = [
 ];
 
 const METRICS = [
-  { value: "$4.2B", label: "Funded in home loans" },
-  { value: "12,000+", label: "Families guided home" },
-  { value: "18 days", label: "Average time to close" },
-  { value: "50", label: "States licensed" },
+  { to: 4.2, decimals: 1, prefix: "$", suffix: "B", label: "Funded in home loans" },
+  { to: 12000, suffix: "+", label: "Families guided home" },
+  { to: 18, suffix: " days", label: "Average time to close" },
+  { to: 50, label: "States licensed" },
 ];
 
 const STEPS = [
@@ -134,7 +135,12 @@ export default function ProductsPage() {
                 <Reveal key={m.label} delay={i * 70}>
                   <div className="h-full bg-forest p-7">
                     <p className="serif text-[clamp(2.2rem,5vw,3rem)] font-bold leading-none text-cream">
-                      {m.value}
+                      <CountUp
+                        to={m.to}
+                        decimals={m.decimals ?? 0}
+                        prefix={m.prefix ?? ""}
+                        suffix={m.suffix ?? ""}
+                      />
                     </p>
                     <p className="mt-3 text-[0.85rem] leading-snug text-cream/65">
                       {m.label}
@@ -196,7 +202,7 @@ export default function ProductsPage() {
                         +
                       </span>
                     </summary>
-                    <p className="max-w-prose pb-6 text-pretty text-[0.95rem] leading-relaxed text-muted">
+                    <p className="faq-answer max-w-prose pb-6 text-pretty text-[0.95rem] leading-relaxed text-muted">
                       {f.a}
                     </p>
                   </details>
@@ -219,7 +225,7 @@ export default function ProductsPage() {
 
 function ProductCard({ name, rate, rateNote, body, points }: Product) {
   return (
-    <article className="flex h-full flex-col border border-line bg-paper p-7 transition-colors hover:border-forest/40">
+    <article className="card-lift flex h-full flex-col border border-line bg-paper p-7 hover:border-forest/40">
       <div className="flex items-start justify-between gap-4 border-b border-line pb-5">
         <h3 className="serif text-[1.3rem] font-bold leading-tight text-ink">{name}</h3>
       </div>

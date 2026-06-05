@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Headset } from "lucide-react";
 import { Logo } from "./logo";
+import { Magnetic } from "./magnetic";
 import { openChat } from "@/lib/chat";
 import { cn } from "@/lib/utils";
 
@@ -48,7 +49,7 @@ export function Navbar() {
               key={l.href}
               href={l.href}
               className={cn(
-                "text-[0.78rem] font-medium tracking-[0.01em] transition-colors",
+                "link-underline text-[0.78rem] font-medium tracking-[0.01em] transition-colors",
                 scrolled
                   ? "text-ink-soft hover:text-forest"
                   : "text-cream/75 hover:text-cream"
@@ -59,27 +60,29 @@ export function Navbar() {
           ))}
         </nav>
 
-        <button
-          type="button"
-          onClick={openChat}
-          aria-label="Speak with a specialist"
-          title="Speak with a specialist"
-          className={cn(
-            "btn-press relative grid size-9 shrink-0 place-items-center rounded-sm",
-            scrolled
-              ? "bg-forest text-cream hover:bg-forest-deep"
-              : "border border-cream/35 text-cream hover:bg-cream hover:text-forest"
-          )}
-        >
-          <Headset className="size-[1.1rem]" strokeWidth={1.75} />
-          <span
+        <Magnetic strength={0.35} className="inline-flex shrink-0">
+          <button
+            type="button"
+            onClick={openChat}
+            aria-label="Speak with a specialist"
+            title="Speak with a specialist"
             className={cn(
-              "absolute -right-0.5 -top-0.5 size-2 rounded-full bg-brass",
-              scrolled ? "ring-2 ring-canvas" : "ring-2 ring-night/40"
+              "btn-press relative grid size-9 shrink-0 place-items-center rounded-sm",
+              scrolled
+                ? "bg-forest text-cream hover:bg-forest-deep"
+                : "border border-cream/35 text-cream hover:bg-cream hover:text-forest"
             )}
-            aria-hidden="true"
-          />
-        </button>
+          >
+            <Headset className="size-[1.1rem]" strokeWidth={1.75} />
+            <span
+              className={cn(
+                "absolute -right-0.5 -top-0.5 size-2 rounded-full bg-brass",
+                scrolled ? "ring-2 ring-canvas" : "ring-2 ring-night/40"
+              )}
+              aria-hidden="true"
+            />
+          </button>
+        </Magnetic>
       </div>
     </header>
   );

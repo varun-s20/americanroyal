@@ -1,23 +1,59 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
 
 /**
  * American Royal hero — a full-bleed home clip kept bright and true to color
  * (only a light neutral scrim, no green grade), with the brand tagline set
  * large in heritage Caslon, anchored bottom-left. No subheading: the line
  * carries the whole promise.
+ *
+ * Motion: the footage drifts slower than the page (a restrained parallax) and
+ * the headline lifts and softens as it leaves — cinematic depth, transform/
+ * opacity only, and fully disabled under prefers-reduced-motion.
  */
 export function Hero() {
   const [videoReady, setVideoReady] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const reduce = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Media drifts down and gently magnifies; the base scale hides the offset.
+  const mediaY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "12%"]);
+  const mediaScale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    reduce ? [1, 1] : [1.08, 1.2]
+  );
+  // Headline rises a touch and dissolves before the next section arrives.
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "-14%"]);
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.65],
+    reduce ? [1, 1] : [1, 0]
+  );
 
   return (
     <section
+      ref={sectionRef}
       id="top"
       className="grain relative isolate flex min-h-[100svh] items-end overflow-hidden bg-night"
     >
       {/* — Media: video only — */}
-      <div className="absolute inset-0 -z-10">
+      <motion.div
+        className="absolute inset-0 -z-10"
+        style={{ y: mediaY, scale: mediaScale }}
+      >
         <video
           autoPlay
           muted
@@ -26,7 +62,7 @@ export function Hero() {
           preload="auto"
           poster="/media/home-exterior.jpg"
           onCanPlay={() => setVideoReady(true)}
-          className="size-full object-cover transition-opacity duration-1000"
+          className="size-full object-cover transition-opacity duration-1000 ease-out"
           style={{ opacity: videoReady ? 1 : 0 }}
         >
           <source
@@ -52,21 +88,24 @@ export function Hero() {
               "linear-gradient(to right, rgba(12,14,11,0.34) 0%, transparent 100%)",
           }}
         />
-      </div>
+      </motion.div>
 
       {/* — Content — */}
-      <div className="relative w-full px-6 pb-20 pt-32 sm:px-8 sm:pb-28">
+      <motion.div
+        className="relative w-full px-6 pb-20 pt-32 sm:px-8 sm:pb-28"
+        style={{ y: contentY, opacity: contentOpacity }}
+      >
         <div className="mx-auto max-w-6xl">
           <h1 className="display max-w-4xl text-cream text-[clamp(2.9rem,11vw,6.5rem)]">
-            <Line delay={120}>Your home,</Line>
-            <Line delay={220}>
+            <Line delay={140}>Your home,</Line>
+            <Line delay={280}>
               in{" "}
               <em className="font-normal italic text-brass-soft">trusted</em>{" "}
               hands.
             </Line>
           </h1>
         </div>
-      </div>
+      </motion.div>
 
       {/* scroll cue */}
       <div className="pointer-events-none absolute bottom-7 left-1/2 hidden h-12 w-px -translate-x-1/2 overflow-hidden bg-cream/15 sm:block">
@@ -79,14 +118,17 @@ export function Hero() {
   );
 }
 
-/** Staggered headline line — clips up from below. */
+/** Staggered headline line — clips up from below and softens into focus. */
 function Line({ children, delay }: { children: React.ReactNode; delay: number }) {
   return (
     <span className="block overflow-hidden pb-[0.06em]">
       <span
         className="reveal block"
         ref={useReveal(delay)}
-        style={{ ["--reveal-y" as string]: "110%" }}
+        style={{
+          ["--reveal-y" as string]: "110%",
+          ["--reveal-blur" as string]: "8px",
+        }}
       >
         {children}
       </span>

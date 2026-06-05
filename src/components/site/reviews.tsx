@@ -2,6 +2,7 @@
 
 import { Star } from "lucide-react";
 import { Reveal } from "./reveal";
+import { CountUp } from "./count-up";
 
 type Review = {
   quote: string;
@@ -49,8 +50,14 @@ export function Reviews() {
                 ))}
               </div>
               <p className="mt-2 text-[0.9rem] text-muted">
-                <span className="serif text-[1.4rem] font-bold text-ink">4.9</span>{" "}
-                out of 5 · 1,200+ closings
+                <CountUp
+                  to={4.9}
+                  decimals={1}
+                  duration={1400}
+                  className="serif text-[1.4rem] font-bold text-ink"
+                />{" "}
+                out of 5 ·{" "}
+                <CountUp to={1200} suffix="+" duration={1800} /> closings
               </p>
             </div>
           </div>
@@ -70,7 +77,7 @@ export function Reviews() {
 
 function ReviewCard({ quote, name, detail }: Review) {
   return (
-    <article className="flex h-full flex-col border border-line bg-paper p-7">
+    <article className="card-lift flex h-full flex-col border border-line bg-paper p-7">
       <div className="flex items-center gap-0.5">
         {Array.from({ length: 5 }).map((_, i) => (
           <Star key={i} className="size-[0.85rem] fill-brass text-brass" strokeWidth={0} />
