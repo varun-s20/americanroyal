@@ -18,9 +18,9 @@ import { motion, useReducedMotion, type PanInfo } from "motion/react";
  * shift is instant instead of sliding.
  */
 const CLIPS = [
+  "https://xhhvokcsehxhjxabtvvw.supabase.co/storage/v1/object/public/dolobuck/Warm_cinematic_shot_of_a_frien%20(1).mp4",
   "https://xhhvokcsehxhjxabtvvw.supabase.co/storage/v1/object/public/dolobuck/Create_me_a_video_with_a_drone%20(2).mp4",
   "https://xhhvokcsehxhjxabtvvw.supabase.co/storage/v1/object/public/dolobuck/Create_me_a_video_with_a_drone%20(1).mp4",
-  "https://xhhvokcsehxhjxabtvvw.supabase.co/storage/v1/object/public/dolobuck/Warm_cinematic_shot_of_a_frien%20(1).mp4",
 ];
 
 const COUNT = CLIPS.length;

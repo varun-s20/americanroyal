@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  ArrowRight,
   ArrowUpRight,
   Calculator,
   MessageCircle,
@@ -73,7 +72,7 @@ export function Connect() {
           <button
             type="button"
             onClick={openChat}
-            className="quote-cta btn-press group mt-10 flex w-full items-center justify-between gap-5 overflow-hidden rounded-2xl px-6 py-6 text-left sm:px-8 sm:py-7"
+            className="quote-cta btn-press group mt-10 flex w-full items-center gap-5 overflow-hidden rounded-2xl px-6 py-6 text-left sm:px-8 sm:py-7"
           >
             <span className="relative z-10 flex items-center gap-4 sm:gap-5">
               <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-cream/15 text-cream sm:size-14">
@@ -81,15 +80,12 @@ export function Connect() {
               </span>
               <span className="min-w-0">
                 <span className="display block text-[1.5rem] leading-none text-cream sm:text-[1.9rem]">
-                  Get a quote now
+                  Get approved now
                 </span>
                 <span className="mt-1.5 block text-[0.9rem] font-medium text-cream/75">
                   Free, with no impact on your credit. About two minutes.
                 </span>
               </span>
-            </span>
-            <span className="tile-gold relative z-10 grid size-11 shrink-0 place-items-center rounded-full text-night transition-transform duration-300 ease-out group-hover:translate-x-1 sm:size-12">
-              <ArrowRight className="size-5" strokeWidth={2.25} />
             </span>
           </button>
         </Reveal>
