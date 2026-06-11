@@ -30,15 +30,15 @@ type Action = {
 const ACTIONS: Action[] = [
   {
     label: "Connect me to a specialist",
-    note: "A short chat, then a real person takes it from there",
-    icon: MessageCircle,
+    note: "Tap to call us now and a real person takes it from there",
+    icon: Phone,
     tile: "tile-red",
-    onClick: openChat,
+    href: "tel:+16466644958",
   },
   {
     label: "Chat with an agent on WhatsApp",
     note: "Message us directly, with replies within the hour",
-    icon: Phone,
+    icon: MessageCircle,
     tile: "tile-teal",
     href: WHATSAPP_URL,
   },
